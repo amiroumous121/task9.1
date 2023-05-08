@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amir-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: amir-app
+  template:
+    metadata:
+      labels:
+        app: amir-app
+    spec:
+      containers:
+        - name: amir-app
+          image: amir121121/amir-app:latest
+          ports:
+            - containerPort: 3041
+          volumeMounts:
+            - mountPath: /app/public
+              name: webfiles
+      volumes:
+        - name: webfiles
+          hostPath: # Use emptyDir or PVC in prod
+            path: C:\Users\john3\Desktop\kubernetes task\public
